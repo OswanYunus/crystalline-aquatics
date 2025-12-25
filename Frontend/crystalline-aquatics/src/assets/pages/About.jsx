@@ -1,5 +1,6 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import PropTypes from 'prop-types';
 import Navbar from "../components/Navbar";
 
 export default function About({ navigate }) {
@@ -228,7 +229,7 @@ export default function About({ navigate }) {
             }
           ].map((item, i) => (
             <motion.div
-              key={i}
+              key={item.title}
               variants={{
                 hidden: { opacity: 0, y: 40 },
                 show: { opacity: 1, y: 0 }
@@ -263,3 +264,7 @@ export default function About({ navigate }) {
     </>
   );
 }
+
+About.propTypes = {
+  navigate: PropTypes.func.isRequired,
+};
