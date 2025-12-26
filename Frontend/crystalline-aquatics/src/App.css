@@ -78,6 +78,21 @@
   }
 }
 
+@media (max-width: 480px) {
+  .navbar {
+    height: 60px;
+    padding: 0 12px;
+  }
+  .site-logo {
+    height: 40px;
+    width: 120px;
+  }
+  .nav-btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+}
+
 /* Footer styles */
 .site-footer {
   background: #f1f1f1;
@@ -121,6 +136,21 @@
   }
   .footer-right {
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-footer-inner {
+    padding: 20px 16px;
+  }
+  .footer-logo {
+    height: 36px;
+  }
+  .footer-desc {
+    font-size: 0.9rem;
+  }
+  .copyright, .policies {
+    font-size: 0.8rem;
   }
 }
 
