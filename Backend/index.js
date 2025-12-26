@@ -30,6 +30,10 @@ const bookingSchema = new mongoose.Schema({
 const Booking = mongoose.model('Booking', bookingSchema);
 
 // Routes
+app.get('/', (req, res) => {
+  res.json({ message: 'Crystalline Aquatics API is running' });
+});
+
 app.post('/api/bookings', async (req, res) => {
   try {
     const booking = new Booking(req.body);
