@@ -1,4 +1,3 @@
-import { useTransform } from "framer-motion";
 import { useRef } from "react";
 import PropTypes from 'prop-types';
 import Navbar from "../components/Navbar";
@@ -6,26 +5,13 @@ import Navbar from "../components/Navbar";
 export default function About({ navigate }) {
   const ref = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-
-  const bgGradient = useTransform(scrollYProgress, [0, 1], [
-    "linear-gradient(to bottom, #ffffff, #dff9ff, #b0e6ff)",
-    "linear-gradient(to bottom, #b0e6ff, #6ac7ff, #003f73)"
-  ]);
-
-  const shimmer = useTransform(scrollYProgress, [0, 1, 1], [1, 1.04, 1]);
-
   return (
     <>
       <Navbar navigate={navigate} />
       <section
         ref={ref}
         style={{
-          background: bgGradient,
-          filter: `brightness(${shimmer.get()})`,
+          background: "linear-gradient(to bottom, #ffffff, #dff9ff, #b0e6ff)",
           width: "100%",
           padding: "5rem 1.5rem",
           overflow: "hidden",
