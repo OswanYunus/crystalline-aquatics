@@ -8,6 +8,7 @@ export default function Hero() {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
+    backgroundColor: '#06cdf0', // Fallback color
   };
 
   return (
