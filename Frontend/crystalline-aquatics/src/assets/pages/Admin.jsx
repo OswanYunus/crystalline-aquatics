@@ -18,44 +18,45 @@ function BookingCard({ booking, onMarkViewed, onDelete }) {
       onKeyDown={handleKeyDown}
       style={{
         background: 'white',
-        padding: '24px',
-        borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        padding: '16px',
+        borderRadius: '8px',
+        boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         borderLeft: booking.viewed ? '4px solid #28a745' : '4px solid #06cdf0',
         opacity: booking.viewed ? 0.8 : 1,
         cursor: 'pointer',
         transition: 'transform 0.2s',
+        marginBottom: '12px',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
           <span style={{
-            padding: '4px 12px',
-            borderRadius: '20px',
-            fontSize: '12px',
+            padding: '4px 8px',
+            borderRadius: '12px',
+            fontSize: '10px',
             fontWeight: '600',
             backgroundColor: booking.viewed ? '#28a745' : '#06cdf0',
             color: 'white'
           }}>
             {booking.viewed ? 'VIEWED' : 'NEW'}
           </span>
-          <span style={{ fontSize: '14px', color: '#666' }}>
+          <span style={{ marginLeft: '8px', fontSize: '12px', color: '#666' }}>
             {new Date(booking.createdAt).toLocaleString()}
           </span>
         </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '6px' }}>
           {!booking.viewed && (
             <button
               onClick={(e) => { e.stopPropagation(); onMarkViewed(booking._id); }}
               onFocus={(e) => e.target.style.background = '#218838'}
               onBlur={(e) => e.target.style.background = '#28a745'}
               style={{
-                padding: '8px 16px',
+                padding: '6px 12px',
                 background: '#28a745',
                 color: 'white',
                 border: 'none',
-                borderRadius: '6px',
-                fontSize: '14px',
+                borderRadius: '4px',
+                fontSize: '12px',
                 fontWeight: '600',
                 cursor: 'pointer',
                 transition: 'background 0.2s'
@@ -71,12 +72,12 @@ function BookingCard({ booking, onMarkViewed, onDelete }) {
             onFocus={(e) => e.target.style.background = '#c82333'}
             onBlur={(e) => e.target.style.background = '#dc3545'}
             style={{
-              padding: '8px 16px',
+              padding: '6px 12px',
               background: '#dc3545',
               color: 'white',
               border: 'none',
-              borderRadius: '6px',
-              fontSize: '14px',
+              borderRadius: '4px',
+              fontSize: '12px',
               fontWeight: '600',
               cursor: 'pointer',
               transition: 'background 0.2s'
@@ -89,17 +90,14 @@ function BookingCard({ booking, onMarkViewed, onDelete }) {
         </div>
       </div>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
-        <div><strong>Name:</strong> {booking.name}</div>
-        <div><strong>Email:</strong> {booking.email}</div>
-        <div><strong>Phone:</strong> {booking.phone}</div>
-        <div><strong>Service:</strong> {booking.service}</div>
-      </div>
-      
       {expanded && (
-        <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #eee' }}>
-          <div style={{ gridColumn: '1 / -1' }}><strong>Address:</strong> {booking.address}</div>
-          {booking.message && <div style={{ gridColumn: '1 / -1', marginTop: '8px' }}><strong>Message:</strong> {booking.message}</div>}
+        <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee' }}>
+          <div><strong>Name:</strong> {booking.name}</div>
+          <div><strong>Email:</strong> {booking.email}</div>
+          <div><strong>Phone:</strong> {booking.phone}</div>
+          <div><strong>Service:</strong> {booking.service}</div>
+          <div><strong>Address:</strong> {booking.address}</div>
+          {booking.message && <div><strong>Message:</strong> {booking.message}</div>}
         </div>
       )}
     </div>
