@@ -227,7 +227,7 @@ export default function About({ navigate }) {
               title: "Tailored Care",
               text: "Personalized solutions for your unique aquatic system."
             }
-          ].map((item, i) => (
+          ].map((item) => (
             <motion.div
               key={item.title}
               variants={{
