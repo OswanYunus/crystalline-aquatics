@@ -91,7 +91,7 @@ function BookingCard({ booking, onMarkViewed, onDelete }) {
       </div>
       
       {expanded && (
-        <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee' }}>
+        <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid #eee', color: '#06cdf0' }}>
           <div><strong>Name:</strong> {booking.name}</div>
           <div><strong>Email:</strong> {booking.email}</div>
           <div><strong>Phone:</strong> {booking.phone}</div>

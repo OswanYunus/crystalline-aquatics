@@ -1,4 +1,4 @@
-import { useScroll, useTransform } from "framer-motion";
+import { useTransform } from "framer-motion";
 import { useRef } from "react";
 import PropTypes from 'prop-types';
 import Navbar from "../components/Navbar";
@@ -21,7 +21,7 @@ export default function About({ navigate }) {
   return (
     <>
       <Navbar navigate={navigate} />
-      <motion.section
+      <section
         ref={ref}
         style={{
           background: bgGradient,
@@ -42,7 +42,7 @@ export default function About({ navigate }) {
         padding: "0 1.5rem"
       }}>
         {/* Left Text */}
-        <motion.div
+        <div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -88,10 +88,10 @@ export default function About({ navigate }) {
           }}>
             My passion for aquatic life combined with 25+ years of experience makes my pond and aquarium maintenance services the perfect solution for keeping your underwater world healthy and vibrant.
           </p>
-        </motion.div>
+        </div>
 
         {/* Right Image + Badge */}
-        <motion.div
+        <div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
@@ -133,7 +133,7 @@ export default function About({ navigate }) {
             }}
           />
 
-          <motion.div
+          <div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
@@ -155,8 +155,8 @@ export default function About({ navigate }) {
           >
             <span style={{ fontSize: "1.25rem" }}>🐠</span>
             <span style={{ fontWeight: 500 }}>25 Years of Aquatic Experience</span>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* SECOND SECTION */}
@@ -196,7 +196,7 @@ export default function About({ navigate }) {
         </motion.p>
 
         {/* ICON GRID */}
-        <motion.div
+        <div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -228,7 +228,7 @@ export default function About({ navigate }) {
               text: "Personalized solutions for your unique aquatic system."
             }
           ].map((item) => (
-            <motion.div
+            <div
               key={item.title}
               variants={{
                 hidden: { opacity: 0, y: 40 },
@@ -256,11 +256,11 @@ export default function About({ navigate }) {
                 marginTop: "0.5rem",
                 color: "#374151"
               }}>{item.text}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
-      </motion.section>
+      </section>
     </>
   );
 }
