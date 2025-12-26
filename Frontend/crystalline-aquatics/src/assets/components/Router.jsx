@@ -16,5 +16,5 @@ const routes = {
 
 export default function Router({ path, navigate }) {
   const Page = routes[path] || Home;
-  return <Page navigate={navigate} />;
+  return path === '/admin' ? <Page /> : <Page navigate={navigate} />;
 }

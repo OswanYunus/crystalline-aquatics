@@ -1,18 +1,32 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function BookingCard({ booking, onMarkViewed }) {
+function BookingCard({ booking, onMarkViewed, onDelete }) {
   const [expanded, setExpanded] = useState(false);
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      setExpanded(!expanded);
+    }
+  };
+
   return (
-    <div style={{
-      background: 'white',
-      padding: '24px',
-      borderRadius: '12px',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-      borderLeft: booking.viewed ? '4px solid #28a745' : '4px solid #06cdf0',
-      opacity: booking.viewed ? 0.8 : 1,
-      cursor: 'pointer'
-    }} onClick={() => setExpanded(!expanded)}>
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={() => setExpanded(!expanded)}
+      onKeyDown={handleKeyDown}
+      style={{
+        background: 'white',
+        padding: '24px',
+        borderRadius: '12px',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        borderLeft: booking.viewed ? '4px solid #28a745' : '4px solid #06cdf0',
+        opacity: booking.viewed ? 0.8 : 1,
+        cursor: 'pointer',
+        transition: 'transform 0.2s',
+      }}
+    >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{
@@ -29,12 +43,36 @@ function BookingCard({ booking, onMarkViewed }) {
             {new Date(booking.createdAt).toLocaleString()}
           </span>
         </div>
-        {!booking.viewed && (
+        <div style={{ display: 'flex', gap: '8px' }}>
+          {!booking.viewed && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onMarkViewed(booking._id); }}
+              onFocus={(e) => e.target.style.background = '#218838'}
+              onBlur={(e) => e.target.style.background = '#28a745'}
+              style={{
+                padding: '8px 16px',
+                background: '#28a745',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                fontSize: '14px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'background 0.2s'
+              }}
+              onMouseOver={(e) => e.target.style.background = '#218838'}
+              onMouseOut={(e) => e.target.style.background = '#28a745'}
+            >
+              Mark as Viewed
+            </button>
+          )}
           <button
-            onClick={(e) => { e.stopPropagation(); onMarkViewed(booking._id); }}
+            onClick={(e) => { e.stopPropagation(); onDelete(booking._id); }}
+            onFocus={(e) => e.target.style.background = '#c82333'}
+            onBlur={(e) => e.target.style.background = '#dc3545'}
             style={{
               padding: '8px 16px',
-              background: '#28a745',
+              background: '#dc3545',
               color: 'white',
               border: 'none',
               borderRadius: '6px',
@@ -43,12 +81,12 @@ function BookingCard({ booking, onMarkViewed }) {
               cursor: 'pointer',
               transition: 'background 0.2s'
             }}
-            onMouseOver={(e) => e.target.style.background = '#218838'}
-            onMouseOut={(e) => e.target.style.background = '#28a745'}
+            onMouseOver={(e) => e.target.style.background = '#c82333'}
+            onMouseOut={(e) => e.target.style.background = '#dc3545'}
           >
-            Mark as Viewed
+            Delete
           </button>
-        )}
+        </div>
       </div>
       
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
@@ -68,7 +106,23 @@ function BookingCard({ booking, onMarkViewed }) {
   );
 }
 
-export default function Admin({ navigate }) {
+BookingCard.propTypes = {
+  booking: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    service: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    message: PropTypes.string,
+    viewed: PropTypes.bool.isRequired,
+    createdAt: PropTypes.string.isRequired,
+  }).isRequired,
+  onMarkViewed: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
+
+export default function Admin() {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
@@ -123,6 +177,21 @@ export default function Admin({ navigate }) {
     }
   };
 
+  const deleteBooking = async (id) => {
+    if (!confirm('Are you sure you want to delete this booking?')) return;
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${id}`, {
+        method: 'DELETE',
+      });
+      
+      if (response.ok) {
+        setBookings(bookings.filter(booking => booking._id !== id));
+      }
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+    }
+  };
+
   if (!authenticated) {
     return (
       <div style={{ width: '100%', minHeight: '100vh', overflowX: 'hidden' }}>
@@ -138,8 +207,9 @@ export default function Admin({ navigate }) {
             <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 18, textAlign: 'center', color: '#06cdf0' }}>Admin Login</h1>
             <form onSubmit={handleLogin} style={{ background: 'white', padding: '32px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#333' }}>Username *</label>
+                <label htmlFor="username" style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#333' }}>Username *</label>
                 <input
+                  id="username"
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -149,9 +219,10 @@ export default function Admin({ navigate }) {
                 />
               </div>
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#333' }}>Password *</label>
+                <label htmlFor="password" style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: '#333' }}>Password *</label>
                 <div style={{ position: 'relative' }}>
                   <input
+                    id="password"
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -216,7 +287,7 @@ export default function Admin({ navigate }) {
                 <p style={{ textAlign: 'center' }}>No bookings yet.</p>
               ) : (
                 bookings.map((booking) => (
-                  <BookingCard key={booking._id} booking={booking} onMarkViewed={markAsViewed} />
+                  <BookingCard key={booking._id} booking={booking} onMarkViewed={markAsViewed} onDelete={deleteBooking} />
                 ))
               )}
             </div>
