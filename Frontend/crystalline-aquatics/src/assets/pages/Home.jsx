@@ -4,9 +4,9 @@ import Footer from '../components/Footer';
 
 export default function Home({ navigate }) {
   return (
-    <div style={{ width: '100%', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div className="main-wrapper">
       {/* Hero (first viewport) */}
-      <section style={{ position: 'relative', height: '100vh', overflow: 'hidden' }}>
+      <section className="hero-section">
         <Hero />
         <Navbar navigate={navigate} />
       </section>

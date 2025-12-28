@@ -41,91 +41,28 @@ export default function Services({ navigate }) {
   ];
 
   return (
-    <div style={{ width: '100%', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div className="main-wrapper">
       <Navbar navigate={navigate} />
       
-      <div style={{ padding: '120px 24px 60px', minHeight: '100vh', background: '#f8fafc' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 18, color: '#06cdf0' }}>Our Services</h1>
-            <p style={{ fontSize: '1.1rem', color: '#666', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
-              Professional pond and aquarium maintenance services covering Wiltshire, UK. 
-              We specialize in all types of aquatic environments to keep your water features thriving.
-            </p>
+      <div className="page-section page-section--light">
+        <div className="container">
+          <div className="text-center page-intro">
+            <h1 className="services-heading">Our Services</h1>
+            <p className="services-sub">Professional pond and aquarium maintenance services covering Wiltshire, UK. We specialize in all types of aquatic environments to keep your water features thriving.</p>
           </div>
           
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-            gap: '2rem',
-            marginBottom: '3rem'
-          }}>
+          <div className="services-grid">
             {services.map((service, index) => (
-              <div key={index} style={{
-                background: 'white',
-                padding: '2rem',
-                borderRadius: '12px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = 'translateY(-5px)';
-                e.target.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-              }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem', textAlign: 'center' }}>
-                  {service.icon}
-                </div>
-                <h3 style={{ 
-                  fontSize: '1.5rem', 
-                  fontWeight: 700, 
-                  marginBottom: '1rem', 
-                  textAlign: 'center',
-                  color: '#333'
-                }}>
-                  {service.title}
-                </h3>
-                <p style={{ 
-                  color: '#666', 
-                  lineHeight: 1.6,
-                  textAlign: 'center'
-                }}>
-                  {service.description}
-                </p>
+              <div key={index} className="service-card">
+                <div className="service-icon">{service.icon}</div>
+                <h3 className="service-title">{service.title}</h3>
+                <p className="service-desc">{service.description}</p>
               </div>
             ))}
           </div>
           
-          <div style={{ textAlign: 'center' }}>
-            <button
-              onClick={() => navigate('/booking')}
-              style={{
-                padding: '16px 32px',
-                background: '#06cdf0',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '1.1rem',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'background 0.2s, transform 0.2s',
-                boxShadow: '0 4px 12px rgba(6, 205, 240, 0.3)'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.background = '#05b8d6';
-                e.target.style.transform = 'translateY(-2px)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.background = '#06cdf0';
-                e.target.style.transform = 'translateY(0)';
-              }}
-            >
-              Book Your Service Now!
-            </button>
+          <div className="text-center">
+            <button className="cta-btn" onClick={() => navigate('/booking')}>Book Your Service Now!</button>
           </div>
         </div>
       </div>

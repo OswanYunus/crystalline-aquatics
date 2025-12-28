@@ -10,77 +10,22 @@ export default function About({ navigate }) {
     <>
       <Navbar navigate={navigate} />
 
-      <section
-        ref={ref}
-        style={{
-          background: "linear-gradient(to bottom, #ffffff, #dff9ff, #b0e6ff)",
-          width: "100%",
-          padding: "5rem 1.5rem",
-          overflow: "hidden",
-          transition: "all 0.7s"
-        }}
-      >
+      <section ref={ref} className="about-section">
         {/* TOP SECTION */}
-        <div
-          style={{
-            maxWidth: "96rem",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "3.5rem",
-            padding: "0 1.5rem"
-          }}
-        >
+        <div className="page-grid">
           {/* Left Text */}
           <div>
-            <span
-              style={{
-                display: "inline-block",
-                backgroundColor: "#d1fae5",
-                color: "#047857",
-                padding: "0.25rem 1rem",
-                borderRadius: "9999px",
-                fontSize: "0.875rem",
-                fontWeight: 600,
-                boxShadow: "0 1px 2px rgba(0,0,0,0.05)"
-              }}
-            >
-              About Me
-            </span>
+            <span className="badge">About Me</span>
 
-            <h1
-              style={{
-                fontSize: "2.25rem",
-                fontWeight: 700,
-                marginTop: "1rem",
-                color: "#064e3b",
-                textShadow: "0 1px 2px rgba(0,0,0,0.1)"
-              }}
-            >
-              Craig Day
-            </h1>
+            <h1 className="about-name">Craig Day</h1>
 
-            <p
-              style={{
-                marginTop: "1.5rem",
-                color: "#1f2937",
-                lineHeight: "1.75rem",
-                fontSize: "1.125rem"
-              }}
-            >
+            <p className="about-text">
               Do you dream of a thriving pond or a vibrant aquarium that brings
               serenity and beauty to your home? I make that dream a reality with
               professional freshwater & tropical tank care.
             </p>
 
-            <p
-              style={{
-                marginTop: "1rem",
-                color: "#1f2937",
-                lineHeight: "1.75rem",
-                fontSize: "1.125rem"
-              }}
-            >
+            <p className="about-text about-text--mt">
               My passion for aquatic life combined with 25+ years of experience
               makes my pond and aquarium maintenance services the perfect
               solution for keeping your underwater world healthy and vibrant.
@@ -88,96 +33,27 @@ export default function About({ navigate }) {
           </div>
 
           {/* Right Image + Badge */}
-          <div style={{ position: "relative" }}>
-            <div
-              style={{
-                position: "absolute",
-                top: "-1.5rem",
-                left: "-1.5rem",
-                width: "6rem",
-                height: "6rem",
-                backgroundColor: "#a5f3fc",
-                borderRadius: "50%",
-                filter: "blur(4rem)",
-                opacity: 0.6
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-2rem",
-                right: "-2rem",
-                width: "8rem",
-                height: "8rem",
-                backgroundColor: "#bfdbfe",
-                borderRadius: "50%",
-                filter: "blur(4rem)",
-                opacity: 0.5
-              }}
-            />
-
-            <img
-              src="https://via.placeholder.com/600x400"
-              alt="placeholder"
-              style={{
-                borderRadius: "1rem",
-                width: "100%",
-                objectFit: "cover",
-                boxShadow: "0 10px 15px rgba(0,0,0,0.2)"
-              }}
-            />
-
-            <div
-              style={{
-                position: "absolute",
-                left: "50%",
-                transform: "translateX(-50%)",
-                bottom: "-1.5rem",
-                backgroundColor: "#059669",
-                color: "white",
-                padding: "1rem 1.5rem",
-                borderRadius: "0.75rem",
-                boxShadow: "0 10px 15px rgba(0,0,0,0.2)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem"
-              }}
-            >
-              <span style={{ fontSize: "1.25rem" }}>🐠</span>
-              <span style={{ fontWeight: 500 }}>
-                25 Years of Aquatic Experience
-              </span>
+          <div className="image-wrapper">
+            <div className="blob blob--one" />
+            <div className="blob blob--two" />
+            <img src="https://via.placeholder.com/600x400" alt="placeholder" className="profile-img" />
+            <div className="experience-badge">
+              <span className="experience-emoji">🐠</span>
+              <span className="experience-text">25 Years of Aquatic Experience</span>
             </div>
           </div>
         </div>
 
         {/* SECOND SECTION */}
-        <div
-          style={{
-            maxWidth: "96rem",
-            margin: "7rem auto 0 auto",
-            padding: "0 1.5rem"
-          }}
-        >
+        <div className="section-container">
           <Motion.h2
-            style={{
-              fontSize: "1.875rem",
-              fontWeight: 700,
-              color: "#064e3b"
-            }}
+            className="section-heading"
           >
             Unwavering Dedication — Exceptional Care
           </Motion.h2>
 
           <Motion.p
-            style={{
-              marginTop: "1.5rem",
-              color: "#1f2937",
-              lineHeight: "1.75rem",
-              maxWidth: "48rem",
-              fontSize: "1.125rem"
-            }}
+            className="section-text"
           >
             Maintaining aquatic habitats is more than a hobby—it's a lifelong
             passion. Whether you have a small tank or a full outdoor pond, I
@@ -193,12 +69,7 @@ export default function About({ navigate }) {
             }}
             initial="hidden"
             animate="show"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-              gap: "3rem",
-              marginTop: "4rem"
-            }}
+            className="icon-grid"
           >
             {[
               {
@@ -226,32 +97,13 @@ export default function About({ navigate }) {
                   hidden: { opacity: 0, y: 40 },
                   show: { opacity: 1, y: 0 }
                 }}
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.4)",
-                  backdropFilter: "blur(1rem)",
-                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                  borderRadius: "1rem",
-                  padding: "1.5rem",
-                  border: "1px solid rgba(255,255,255,0.3)"
-                }}
+                className="icon-card"
               >
-                <div style={{ fontSize: "2.25rem" }}>{item.icon}</div>
-                <h3
-                  style={{
-                    fontWeight: 700,
-                    fontSize: "1.25rem",
-                    marginTop: "0.75rem",
-                    color: "#065f46"
-                  }}
-                >
+                <div className="icon-emoji">{item.icon}</div>
+                <h3 className="icon-title">
                   {item.title}
                 </h3>
-                <p
-                  style={{
-                    marginTop: "0.5rem",
-                    color: "#374151"
-                  }}
-                >
+                <p className="icon-text">
                   {item.text}
                 </p>
               </Motion.div>
