@@ -13,9 +13,16 @@ export default function Booking({ navigate }) {
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    let newValue = value;
+    if (name === 'phone') {
+      // allow numbers only and limit to 10 digits
+      newValue = value.replace(/\D/g, '').slice(0, 10);
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: newValue
     });
   };
 
@@ -82,7 +89,18 @@ export default function Booking({ navigate }) {
               <label className="form-label">Phone Number *</label>
               <div className="phone-row">
                 <span className="phone-prefix">+44</span>
-                <input className="form-input phone-input" type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="e.g. 7375860089" />
+                <input
+                  className="form-input phone-input"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g. 7375860089"
+                  inputMode="numeric"
+                  pattern="[0-9]{10}"
+                  maxLength={10}
+                />
               </div>
             </div>
 
